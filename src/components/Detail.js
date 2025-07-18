@@ -1,35 +1,49 @@
+// src/components/Detail.js
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
-import db from "../firebase";
 
-const Detail = (props) => {
+const Detail = () => {
   const { id } = useParams();
-  const [detailData, setDetailData] = useState({});
+  const [detailData, setDetailData] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const docRef = doc(db, "movies", id);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setDetailData(docSnap.data());
-      } else {
-        console.log("No such document in Firebase 🔥");
+    const getMovieDetail = async () => {
+      try {
+        const docRef = doc(db, "movies", id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          console.log("Movie data from Firestore:", docSnap.data());
+          setDetailData(docSnap.data());
+        } else {
+          console.log("No such document in firebase 🔥");
+        }
+      } catch (error) {
+        console.log("Error getting document:", error);
       }
     };
 
-    fetchData().catch((error) => console.log("Error getting document:", error));
+    console.log("ID from URL:", id);
+    getMovieDetail();
   }, [id]);
+
+  if (!detailData) {
+    return <h2 style={{ color: "white", marginTop: "100px" }}>Loading...</h2>;
+  }
 
   return (
     <Container>
       <Background>
         <img alt={detailData.title} src={detailData.backgroundImg} />
       </Background>
+
       <ImageTitle>
         <img alt={detailData.title} src={detailData.titleImg} />
       </ImageTitle>
+
       <ContentMeta>
         <Controls>
           <Player>
@@ -56,6 +70,12 @@ const Detail = (props) => {
     </Container>
   );
 };
+
+export default Detail;
+
+// [Your styled components below... no change needed]
+
+
 
 const Container = styled.div`
   position: relative;
@@ -91,9 +111,9 @@ const ImageTitle = styled.div`
   display: flex;
   justify-content: flex-start;
   margin: 0px auto;
-  height: 25vw;  /* Reduced height to move it up */
-  min-height: 150px;  /* Reduced min-height to move it up */
-  padding-bottom: 67px;  /* Reduced padding-bottom to move it up */
+  height: 25vw;
+  min-height: 150px;
+  padding-bottom: 67px;
   width: 100%;
 
   img {
@@ -105,8 +125,8 @@ const ImageTitle = styled.div`
 
 const ContentMeta = styled.div`
   max-width: 874px;
-  margin-top: -70px;  /* Added negative margin to move it up */
-  padding-bottom: 20px;  /* Optional: Add padding-bottom if needed */
+  margin-top: -70px;
+  padding-bottom: 20px;
 `;
 
 const Controls = styled.div`
@@ -232,5 +252,3 @@ const Description = styled.div`
     font-size: 14px;
   }
 `;
-
-export default Detail;

@@ -1,24 +1,29 @@
+import React from "react";
 import styled from "styled-components";
 
-const Login = (props) => {
+const Login = () => {
   return (
     <Container>
       <Content>
         <CTA>
-          <CTALogoOne src="/images/cta-logo-one.svg" alt="" />
+          <CTALogoOne src={`${process.env.PUBLIC_URL}/images/cta-logo-one.svg`} alt="Logo One" />
           <SignUp>GET ALL THERE</SignUp>
           <Description>
-            Get Premier Access to Raya and the Last Dragon for an additional fee
-            with a Disney+ subscription. As of 03/26/21, the price of Disney+
-            and The Disney Bundle will increase by $1.
+            Get Premier Access to Raya and the Last Dragon for an additional fee with a Disney+ subscription.
           </Description>
-          <CTALogoTwo src="/images/cta-logo-two.png" alt="" />
+          <CTALogoTwo src={`${process.env.PUBLIC_URL}/images/cta-logo-two.png`} alt="Logo Two" />
         </CTA>
         <BgImage />
       </Content>
     </Container>
   );
 };
+
+
+
+// rest styled-components (keep as-is)
+
+
 
 const Container = styled.section`
   overflow: hidden;
@@ -40,6 +45,7 @@ const Content = styled.div`
   flex-direction: column;
   padding: 80px 40px;
   height: 100%;
+  z-index: 1;
 `;
 
 const BgImage = styled.div`
@@ -47,7 +53,7 @@ const BgImage = styled.div`
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url("/images/login-background.jpg");
+  background-image: url(${process.env.PUBLIC_URL + "/images/login-background.jpg"});
   position: absolute;
   top: 0;
   right: 0;
