@@ -6,7 +6,7 @@ import { getFirestore } from 'firebase/firestore';
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAPUY-7WWYh0nsD4cCwo5A3oMPXdwp3zAg",
+  apiKey: "your api",
   authDomain: "disney-plus-clone-85b77.firebaseapp.com",
   projectId: "disney-plus-clone-85b77",
   storageBucket: "disney-plus-clone-85b77.appspot.com",
