@@ -6,10 +6,13 @@ import "./App.css";
 import Home from "./components/Home";
 import Detail from "./components/Detail";
 
+const basename =
+  process.env.NODE_ENV === "production" ? process.env.PUBLIC_URL : "/";
+
 function App() {
   return (
     <div className="App">
-      <Router >
+      <Router basename={basename}>
         <Header />
         <Routes>
           <Route path="/" element={<Login />} />

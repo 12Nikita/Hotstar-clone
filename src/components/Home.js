@@ -16,45 +16,48 @@ const Home = () => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
 
-  useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "movies"), (snapshot) => {
-      const recommendsData = [];
-      const newDisneysData = [];
-      const originalsData = [];
-      const trendingData = [];
+ useEffect(() => {
+  if (!userName) return; // don't fetch until user is available
 
-      snapshot.docs.forEach((doc) => {
-        const data = { id: doc.id, ...doc.data() };
-        switch (data.type) {
-          case "recommend":
-            recommendsData.push(data);
-            break;
-          case "new":
-            newDisneysData.push(data);
-            break;
-          case "original":
-            originalsData.push(data);
-            break;
-          case "trending":
-            trendingData.push(data);
-            break;
-          default:
-            break;
-        }
-      });
+  const unsubscribe = onSnapshot(collection(db, "movies"), (snapshot) => {
+    const recommendsData = [];
+    const newDisneysData = [];
+    const originalsData = [];
+    const trendingData = [];
 
-      dispatch(
-        setMovies({
-          recommend: recommendsData,
-          newDisney: newDisneysData,
-          original: originalsData,
-          trending: trendingData,
-        })
-      );
+    snapshot.docs.forEach((doc) => {
+      const data = { id: doc.id, ...doc.data() };
+      switch (data.type) {
+        case "recommend":
+          recommendsData.push(data);
+          break;
+        case "new":
+          newDisneysData.push(data);
+          break;
+        case "original":
+          originalsData.push(data);
+          break;
+        case "trending":
+          trendingData.push(data);
+          break;
+        default:
+          break;
+      }
     });
 
-    return () => unsubscribe();
-  }, [userName, dispatch]);
+    dispatch(
+      setMovies({
+        recommend: recommendsData,
+        newDisney: newDisneysData,
+        original: originalsData,
+        trending: trendingData,
+      })
+    );
+  });
+
+  return () => unsubscribe();
+}, [userName, dispatch]);
+
 
   return (
     <Container>
