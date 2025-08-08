@@ -1,4 +1,3 @@
-// src/components/Detail.js
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -22,7 +21,7 @@ const Detail = () => {
           setDetailData(docSnap.data());
         } else {
           if (process.env.NODE_ENV === "development") {
-            console.log("No such document in firebase 🔥");
+            console.log("No such document in firebase");
           }
         }
       } catch (error) {
@@ -80,9 +79,6 @@ const Detail = () => {
 };
 
 export default Detail;
-
-// [Your styled components below... no change needed]
-
 
 
 const Container = styled.div`

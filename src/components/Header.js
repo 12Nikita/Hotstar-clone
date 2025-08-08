@@ -89,7 +89,6 @@ const Header = () => {
   );
 };
 
-// Styled Components
 
 const Nav = styled.nav`
   position: fixed;
