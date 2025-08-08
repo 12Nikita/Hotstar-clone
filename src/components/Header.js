@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, provider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   selectUserName,
   setUserLoginDetails,
@@ -68,7 +69,10 @@ const Header = () => {
       ) : (
         <>
           <NavMenu>
-            <a href="/home"><img src={`${process.env.PUBLIC_URL}/images/home-icon.svg`} alt="HOME" /><span>HOME</span></a>
+            <Link to="/home">
+  <img src={`${process.env.PUBLIC_URL}/images/home-icon.svg`} alt="HOME" />
+  <span>HOME</span>
+</Link>
             <button><img src={`${process.env.PUBLIC_URL}/images/search-icon.svg`} alt="SEARCH" /><span>SEARCH</span></button>
             <button><img src={`${process.env.PUBLIC_URL}/images/watchlist-icon.svg`} alt="WATCHLIST" /><span>WATCHLIST</span></button>
             <button><img src={`${process.env.PUBLIC_URL}/images/original-icon.svg`} alt="ORIGINALS" /><span>ORIGINALS</span></button>

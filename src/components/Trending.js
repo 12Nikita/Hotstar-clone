@@ -5,7 +5,7 @@ import { selectTrending } from "../feature/movie/movieSlice";
 
 const Trending = (props) => {
   const movies = useSelector(selectTrending);
-  console.log("Trending movies: ", movies); 
+ 
 
   return (
     <Container>

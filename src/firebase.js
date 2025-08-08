@@ -1,4 +1,4 @@
-// src/firebase.js
+
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import {getStorage} from 'firebase/storage';
@@ -6,7 +6,7 @@ import { getFirestore } from 'firebase/firestore';
 
 
 const firebaseConfig = {
-  apiKey: "API-KEY",
+  apiKey: "API KEY",
   authDomain: "disney-plus-clone-3cbd4.firebaseapp.com",
   projectId: "disney-plus-clone-3cbd4",
   storageBucket: "disney-plus-clone-3cbd4.firebasestorage.app",

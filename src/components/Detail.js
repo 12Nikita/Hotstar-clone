@@ -9,25 +9,33 @@ const Detail = () => {
   const { id } = useParams();
   const [detailData, setDetailData] = useState(null);
 
-  useEffect(() => {
-    const getMovieDetail = async () => {
+ useEffect(() => {
+    const getMovieDetail = async (movieId) => {
       try {
-        const docRef = doc(db, "movies", id);
+        const docRef = doc(db, "movies", movieId);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          console.log("Movie data from Firestore:", docSnap.data());
+          if (process.env.NODE_ENV === "development") {
+            console.log("Movie data from Firestore:", docSnap.data());
+          }
           setDetailData(docSnap.data());
         } else {
-          console.log("No such document in firebase 🔥");
+          if (process.env.NODE_ENV === "development") {
+            console.log("No such document in firebase 🔥");
+          }
         }
       } catch (error) {
-        console.log("Error getting document:", error);
+        console.error("Error getting document:", error);
       }
     };
 
-    console.log("ID from URL:", id);
-    getMovieDetail();
+    if (id) {
+      if (process.env.NODE_ENV === "development") {
+        console.log("ID from URL:", id);
+      }
+      getMovieDetail(id);
+    }
   }, [id]);
 
   if (!detailData) {

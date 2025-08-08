@@ -15,7 +15,7 @@ function NewDisney() {
         .filter((doc) => doc.data().type === "new")
         .map((doc) => ({ id: doc.id, ...doc.data() }));
 
-      console.log("New Disney movies:", filtered);
+     
       setNewDisney(filtered);
     });
 
@@ -29,9 +29,7 @@ function NewDisney() {
         {newDisney.map((movie) => (
           <Wrap key={movie.id}>
             <Link
-  to={`/detail/${movie.id}`}
-  onClick={() => console.log("Navigating to:", `/detail/${movie.id}`)}
->
+  to={`/detail/${movie.id}`}>
 
               <img src={movie.cardImg} alt={movie.title} />
             </Link>
@@ -44,7 +42,7 @@ function NewDisney() {
 
 export default NewDisney;
 
-// Styled Components
+
 const Container = styled.div`
   padding: 0 0 26px;
 `;

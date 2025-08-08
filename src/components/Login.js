@@ -19,12 +19,6 @@ const Login = () => {
   );
 };
 
-
-
-// rest styled-components (keep as-is)
-
-
-
 const Container = styled.section`
   overflow: hidden;
   display: flex;

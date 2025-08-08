@@ -17,7 +17,7 @@ const Home = () => {
   const userName = useSelector(selectUserName);
 
  useEffect(() => {
-  if (!userName) return; // don't fetch until user is available
+  if (!userName) return; 
 
   const unsubscribe = onSnapshot(collection(db, "movies"), (snapshot) => {
     const recommendsData = [];

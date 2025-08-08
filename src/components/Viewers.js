@@ -48,7 +48,7 @@ const Viewers = () => {
 
 export default Viewers;
 
-// ✅ Styled Components
+
 const Container = styled.div`
   margin-top: 30px;
   padding: 30px 0 26px;
